@@ -1,7 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
-import * as mongoose from 'mongoose';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 
@@ -10,7 +9,7 @@ class App {
 
   constructor(controllers: Controller[]) {
     this.app = express();
-    this.connectToTheDatabase();
+    //this.connectToTheDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
     this.initializeErrorHandling();
@@ -37,12 +36,12 @@ class App {
     this.app.use(errorMiddleware);
   }
 
-  private connectToTheDatabase() {
-    const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
-    mongoose.connect(
-      `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
-    );
-  }
+  // private connectToTheDatabase() {
+  //   const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
+  //   mongoose.connect(
+  //     `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
+  //   );
+  // }
 }
 
 export default App;
